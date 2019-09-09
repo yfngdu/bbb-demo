@@ -38,7 +38,6 @@ jobs:
             sudo gem install bundler
             bundle install --jobs=4 --retry=3 --path vendor/bundle
             yarn install --check-files
-            gem install rspec_junit_formatter
             RAILS_ENV=test bundle exec rspec -r rspec_junit_formatter --format RspecJunitFormatter -o $CIRCLE_TEST_REPORTS/rspec/junit.xml
 
       - save_cache:

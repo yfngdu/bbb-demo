@@ -34,6 +34,7 @@ group :development, :test do
   # use rspec tests
   gem "rspec"
   gem 'rspec-rails'
+  gem "rspec_junit_formatter"
 end
 
 group :development do
