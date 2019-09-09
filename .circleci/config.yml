@@ -48,6 +48,7 @@ jobs:
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
       # Database setup - No DB currently
+      - run: mysql -h 127.0.0.1 -u root bbb_demo
       - run: bundle exec rake db:create
       # - run: bundle exec rake db:schema:load
 
