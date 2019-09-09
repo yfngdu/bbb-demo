@@ -37,6 +37,7 @@ jobs:
             sudo rm /usr/local/bin/bundler
             sudo gem install bundler
             bundle install --jobs=4 --retry=3 --path vendor/bundle
+            yarn install --check-files
 
       - save_cache:
           paths:
