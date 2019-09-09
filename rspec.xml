@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="rspec" tests="1" skipped="0" failures="1" errors="0" time="3.973583" timestamp="2019-09-09T14:21:03-04:00" hostname="amy-XPS-8300">
+<properties>
+<property name="seed" value="60920"/>
+</properties>
+<testcase classname="spec.features.create_meeting" name="Create Meeting:  Go to home page" file="./spec/features/create_meeting.rb" time="3.971754"><failure message="undefined method `get_recordings&apos; for nil:NilClass" type="NoMethodError">Failure/Error: response = @api.get_recordings
+
+NoMethodError:
+  undefined method `get_recordings&apos; for nil:NilClass
+./app/controllers/pages_controller.rb:10:in `home&apos;
+------------------
+--- Caused by: ---
+Capybara::ElementNotFound:
+  Unable to find field &quot;name&quot; that is not disabled
+  ./spec/features/create_meeting.rb:6:in `block (2 levels) in &lt;main&gt;&apos;</failure></testcase>
+</testsuite>
