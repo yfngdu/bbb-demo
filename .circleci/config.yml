@@ -48,20 +48,22 @@ jobs:
       # - run: bundle exec rake db:create
       # - run: bundle exec rake db:schema:load
 
-      # run tests! - no tests currently
+      # run tests!
       - run:
           name: run tests
+          override:
+            - RAILS_ENV=test bundle exec rspec -r rspec_junit_formatter --format RspecJunitFormatter -o $CIRCLE_TEST_REPORTS/rspec/junit.xml
           command: |
             mkdir /tmp/test-results
-      #       TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | \
-      #         circleci tests split --split-by=timings)"
-      #
-      #       bundle exec rspec \
-      #         --format progress \
-      #         --format RspecJunitFormatter \
-      #         --out /tmp/test-results/rspec.xml \
-      #         --format progress \
-      #         $TEST_FILES
+            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | \
+              circleci tests split --split-by=timings)"
+
+            bundle exec rspec \
+              --format progress \
+              --format RspecJunitFormatter \
+              --out /tmp/test-results/rspec.xml \
+              --format progress \
+              $TEST_FILES
 
       # collect reports
       - store_test_results:
