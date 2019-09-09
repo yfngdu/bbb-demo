@@ -15,7 +15,7 @@ jobs:
       # - image: circleci/postgres:9.4
         environment:
           BUNDLER_VERSION: 2.0.2
-      - image: circleci/mysql:8.0.4
+      - image: circleci/mysql:5.7
         environment:
           MYSQL_ROOT_PASSWORD: rootpw
           MYSQL_DATABASE: bbb_demo_test
@@ -66,7 +66,7 @@ jobs:
           name: Install MySQL CLI; Database setup
           command: |
             sudo apt-get install default-mysql-client
-            mysql -h 127.0.0.1 -u user -ppassw0rd bbb_demo_test < sql-data/dummy.sql
+            mysql -h 127.0.0.1 -u user -p passw0rd bbb_demo_test < sql-data/dummy.sql
             bundle exec rake db:create
             # bundle exec rake db:schema:load
 
