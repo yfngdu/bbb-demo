@@ -57,9 +57,9 @@ jobs:
           command: |
             mkdir /tmp/test-results
             TEST_FILES="$(circleci tests glob "spec/features/*.rb" | \
-              circleci tests split --split-by=timings)"
+              circleci tests split --split-by=timings --timings-type=classname)"
 
-            sudo bundle exec rspec \
+            bundle exec rspec \
               # --format progress \
               # --format RspecJunitFormatter \
               # --out /tmp/test-results/rspec.xml \
