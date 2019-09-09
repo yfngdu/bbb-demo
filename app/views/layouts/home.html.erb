@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BbbDemo</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'home', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'home', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <div class="border">
+      <%= yield %>
+      <div class="form-div">
+        <%= form_with(url: "api/room/join", method: "post") do %>
+          <%= label_tag(:q, "Enter your name:") %>
+          <%= text_field_tag(:name) %>
+          <%= label_tag(:q, "Would you like to record the meeting?")%>
+          <%= check_box_tag (:record)%>
+          <%= submit_tag("Enter") %>
+        <% end %>
+      </div>
+      <div class="recordings_list">
+          <% @records.each do |record| %>
+            <div id=<%= record[:rowID]%> class="row">
+              <div class="recording_name vertical_center">
+                <%= label_tag record[:name] %>
+              </div>
+              <div class="recording_time vertical_center">
+                <%= label_tag "", record[:endTime], :class=>"record_time" %>
+              </div>
+              <div class="recording_delete_btn">
+                <%= button_tag "Delete Recording", :id=>record[:deleteID], :class=>"delete_btn"%>
+              </div>
+            </div>
+          <% end %>
+      </div>
+    </div>
+  </body>
+</html>

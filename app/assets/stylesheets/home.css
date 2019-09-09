@@ -1,0 +1,91 @@
+form {
+  display: inline-block;
+  border-radius: 5px;
+  padding: 30px 30px 20px 30px;
+  /* width: 92%; */
+}
+
+input[type=text] {
+  width: 300px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 300px;
+  background-color: #0F70D7;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  display: block;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=checkbox] {
+  display:inline-block;
+}
+
+input[type=submit]:hover {
+  color: lightgrey;
+}
+
+.recordings_list {
+  grid-gap: 10px;
+  background-color: #2196F3;
+  padding: 10px 10px 10px 10px;
+  width: 600px;
+}
+
+.row {
+  display: grid;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
+.row:last-child {
+  margin-bottom: 0px;
+}
+
+.border {
+  padding: 20px;
+  max-width: 620px;
+  text-align: center;
+  display:block;
+  margin: auto;
+}
+
+.vertical_center {
+  line-height: 2.5;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.recording_name {
+  grid-column: 1/span 1;
+}
+
+.recording_time {
+  grid-column: 2/span 2;
+}
+
+.recording_delete_btn {
+  grid-column: 4;
+}
+
+.delete_btn {
+  background-color: #f5d4b5;
+  padding: 14px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.delete_btn:hover {
+  background-color: #fbf1e9;
+}
