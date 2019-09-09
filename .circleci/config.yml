@@ -67,7 +67,7 @@ jobs:
           name: Install MySQL CLI; Database setup
           command: |
             sudo apt-get install default-mysql-client
-            mysql -h 127.0.0.1 -u root bbb_demo_test < "exit;"
+            mysql -h 127.0.0.1 -u root bbb_demo_test | echo "exit;"
             bundle exec rake db:create
             # bundle exec rake db:schema:load
 
