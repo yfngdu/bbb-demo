@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="rspec" tests="3" skipped="0" failures="0" errors="0" time="6.333433" timestamp="2019-09-09T14:41:27-04:00" hostname="amy-XPS-8300">
+<testsuite name="rspec" tests="1" skipped="0" failures="0" errors="0" time="5.131019" timestamp="2019-09-09T14:48:54-04:00" hostname="amy-XPS-8300">
 <properties>
-<property name="seed" value="39219"/>
+<property name="seed" value="52017"/>
 </properties>
-<testcase classname="spec.features.create_meeting" name="Create Meeting:  Go to home page" file="./spec/features/create_meeting.rb" time="5.120193"></testcase>
-<testcase classname="spec.features.delete_recording" name="Delete recordings:  Delete recordings on home page" file="./spec/features/delete_recording.rb" time="0.407415"></testcase>
-<testcase classname="spec.features.get_recordings" name="Get recordings:  Check recordings on home page" file="./spec/features/get_recordings.rb" time="0.804406"></testcase>
+<testcase classname="spec.features.create_meeting" name="Create Meeting:  Go to home page" file="./spec/features/create_meeting.rb" time="5.130183"></testcase>
 </testsuite>
