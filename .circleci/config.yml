@@ -70,6 +70,8 @@ jobs:
             echo "before accessing bbb_demo_test --------------------"
             mysql -h 127.0.0.1 -u root bbb_demo_test < sql-data/dummy.sql
             echo "after accessing bbb_demo_test --------------------"
+            ls -l /var/run/mysqld/mysqld.sock
+            echo "-------------------------------------------"
             bundle exec rake db:create
             # bundle exec rake db:schema:load
 
