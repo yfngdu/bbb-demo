@@ -64,12 +64,12 @@ jobs:
             done
             echo Failed waiting for MySQL && exit 1
       - run:
-          name: Install MySQL CLI; Import dummy data; run an example query
+          name: Install MySQL CLI; Database setup
           command: |
             sudo apt-get install default-mysql-client
-      # Database setup - No DB currently
-      - run: bundle exec rake db:create
-      # - run: bundle exec rake db:schema:load
+            mysql -h 127.0.0.1 -u root bbb_demo_test
+            bundle exec rake db:create
+            # bundle exec rake db:schema:load
 
       # run tests!
       - run:
