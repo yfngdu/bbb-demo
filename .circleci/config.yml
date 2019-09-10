@@ -64,7 +64,10 @@ jobs:
           name: run tests
           command: |
             mkdir /tmp/test-results
-            bin/rspec spec/features/*
+            bundle exec rspec spec/features/* --format progress \
+                            --format RspecJunitFormatter \
+                            --out /tmp/test-results/rspec.xml \
+                            --format progress
 
       # collect reports
       - store_test_results:
