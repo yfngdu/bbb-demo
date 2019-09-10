@@ -44,6 +44,7 @@ jobs:
             yarn install --check-files
             RAILS_ENV="test bundle exec rspec -r rspec_junit_formatter --format RspecJunitFormatter -o $CIRCLE_TEST_REPORTS/rspec/junit.xml"
             sudo apt install -y postgresql-client || true
+            bundle binstubs rspec-core
 
       - save_cache:
           paths:
