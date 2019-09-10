@@ -60,7 +60,7 @@ RSpec.configure do |config|
         }
       )
       .to_return(status: 200, body: "", headers: {}) if ENV['LOADBALANCER_ENDPOINT']
-    stub_request(:any, /#{ENV['LOADBALANCER_ENDPOINT'] + 'api\/join'}/)
+    stub_request(:any, /#{"https:\/\/amy.blindside-dev.com\/bigbluebutton\/api\/join"}/)
       .with(
         headers:
         {
@@ -69,28 +69,8 @@ RSpec.configure do |config|
           'User-Agent': 'Ruby',
         }
       )
-      .to_return(status: 200, body: "
-        <response>
-          <version>1.0</version>
-          <returncode>SUCCESS</returncode>
-          <user>
-            <name>greenlight</name>
-            <maxMeetings>1000</maxMeetings>
-            <apiURL>https:\/\/amy.blindside-dev.com\/bigbluebutton\/api</apiURL>
-            <secret>secret</secret>
-          </user>
-        </response>", headers: {}) if ENV['LOADBALANCER_ENDPOINT']
-        stub_request(:any, /#{"https:\/\/amy.blindside-dev.com\/bigbluebutton\/ap\/join"}/)
-          .with(
-            headers:
-            {
-              'Accept': '*/*',
-              'Accept-Encoding': 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-              'User-Agent': 'Ruby',
-            }
-          )
-          .to_return(status: 200, body: "", headers: {}) if ENV['LOADBALANCER_ENDPOINT']
-        stub_request(:any, /#{"https:\/\/amy.blindside-dev.com\/bigbluebutton\/ap\/create"}/)
+      .to_return(status: 200, body: "", headers: {}) if ENV['LOADBALANCER_ENDPOINT']
+        stub_request(:any, /#{"https:\/\/amy.blindside-dev.com\/bigbluebutton\/api\/create"}/)
       .with(
         headers:
         {
