@@ -52,12 +52,6 @@ jobs:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
-      - run:
-          name: deployment
-          command: |
-            cp sample.env .env
-            bash ~/repo/scripts/build_image_master.sh
-
       # run tests!
       - run:
           name: run tests
