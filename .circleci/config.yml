@@ -54,8 +54,9 @@ jobs:
       - run:
           name: Database setup
           command: |
-            bundle exec rake db:create
-            bundle exec rake db:schema:load
+            # bundle exec rake db:create
+            # bundle exec rake db:schema:load
+            pg_ctl -D /var/lib/postgresql/data -l logfile start
           environment:
             DATABASE_URL: "postgres://user@localhost:5432/bbb_demo_test"
 
