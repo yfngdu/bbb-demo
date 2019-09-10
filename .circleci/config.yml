@@ -51,13 +51,12 @@ jobs:
           paths:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-          
+
       - run:
           name: deployment
           command: |
+            cp sample.env .env
             bash ~/repo/scripts/build_image_master.sh
-          environment:
-            DATABASE_URL: "postgres://user@localhost:5432/bbb_demo_test"
 
       # run tests!
       - run:
