@@ -34,9 +34,6 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run: start postgres server
-        command: |
-          pg_ctl -D /var/lib/postgresql/data -l logfile start
       - run:
           name: install dependencies
           command: |
