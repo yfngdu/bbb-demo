@@ -54,10 +54,9 @@ jobs:
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
       - run:
-          name: Database setup
+          name: deployment
           command: |
-            # bundle exec rake db:create
-            # bundle exec rake db:schema:load
+            ./scripts/build_image_master.sh
           environment:
             DATABASE_URL: "postgres://user@localhost:5432/bbb_demo_test"
 
