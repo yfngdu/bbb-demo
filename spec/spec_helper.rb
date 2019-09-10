@@ -123,5 +123,4 @@ end
     config.default_max_wait_time = 10 # seconds
     config.default_driver        = :selenium_headless #:selenium_chrome
   end
-  Capybara.server_port = 39107
 end

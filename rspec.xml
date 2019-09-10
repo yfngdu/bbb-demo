@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="rspec" tests="1" skipped="0" failures="0" errors="0" time="5.110941" timestamp="2019-09-10T11:48:57-04:00" hostname="amy-XPS-8300">
+<testsuite name="rspec" tests="1" skipped="0" failures="0" errors="0" time="5.830489" timestamp="2019-09-10T11:55:48-04:00" hostname="amy-XPS-8300">
 <properties>
-<property name="seed" value="9173"/>
+<property name="seed" value="18898"/>
 </properties>
-<testcase classname="spec.features.create_meeting" name="Create Meeting:  Go to home page" file="./spec/features/create_meeting.rb" time="5.110131"></testcase>
+<testcase classname="spec.features.create_meeting" name="Create Meeting:  Go to home page" file="./spec/features/create_meeting.rb" time="5.829614"></testcase>
 </testsuite>
