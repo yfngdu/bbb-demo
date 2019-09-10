@@ -76,10 +76,88 @@ RSpec.configure do |config|
           <user>
             <name>greenlight</name>
             <maxMeetings>1000</maxMeetings>
-            <apiURL>http:\/\/bbb.example.com\/bigbluebutton\/api</apiURL>
+            <apiURL>https:\/\/amy.blindside-dev.com\/bigbluebutton\/api</apiURL>
             <secret>secret</secret>
           </user>
         </response>", headers: {}) if ENV['LOADBALANCER_ENDPOINT']
+    stub_request(:any, /#{"https:\/\/amy.blindside-dev.com\/bigbluebutton\/ap\/create"}/)
+      .with(
+        headers:
+        {
+          'Accept': '*/*',
+          'Accept-Encoding': 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+          'User-Agent': 'Ruby',
+        }
+      )
+      .to_return(status: 200, body: "
+        <response>
+          <returncode>SUCCESS</returncode>
+          <meetingID>demo-meeting-375</meetingID>
+          <internalMeetingID>404c2e3bbe29d750eff5ee218d2825a8be748cb3-1568148622091</internalMeetingID>
+          <parentMeetingID>bbb-none</parentMeetingID>
+          <attendeePW>12345</attendeePW>
+          <moderatorPW>54321</moderatorPW>
+          <createTime>1568148622091</createTime>
+          <voiceBridge>49545</voiceBridge>
+          <dialNumber>1-800-000-0000x00000#</dialNumber>
+          <createDate>Tue Sep 10 20:50:22 UTC 2019</createDate>
+          <hasUserJoined>false</hasUserJoined>
+          <duration>0</duration>
+          <hasBeenForciblyEnded>false</hasBeenForciblyEnded>
+          <messageKey></messageKey>
+          <message></message>
+        </response>", headers: {}) if ENV['LOADBALANCER_ENDPOINT']
+  stub_request(:any, /#{"https:\/\/amy.blindside-dev.com\/bigbluebutton\/api\/getRecordings"}/)
+    .with(
+      headers:
+      {
+        'Accept': '*/*',
+        'Accept-Encoding': 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+        'User-Agent': 'Ruby',
+      }
+    )
+    .to_return(status: 200, body: '
+      <response>
+        <returncode>SUCCESS</returncode>
+        <recordings>
+          <recording>
+          <recordID>3c687a7249dfab20abaadb8cba3ea8fff973c56a-1567802108298</recordID>
+          <meetingID>demo-meeting-673</meetingID>
+          <internalMeetingID>3c687a7249dfab20abaadb8cba3ea8fff973c56a-1567802108298</internalMeetingID>
+          <name>Demo Meeting</name>
+          <isBreakout>false</isBreakout>
+          <published>true</published>
+          <state>published</state>
+          <startTime>1567802108298</startTime>
+          <endTime>1567802117026</endTime>
+          <participants>1</participants>
+          <rawSize>1609698</rawSize>
+          <metadata>
+            <isBreakout>false</isBreakout>
+            <meetingId>demo-meeting-673</meetingId>
+            <meetingName>Demo Meeting</meetingName>
+          </metadata>
+          <size>140330</size>
+          <playback>
+            <format>
+              <type>presentation</type>
+              <url>https://amy.blindside-dev.com/playback/presentation/2.0/playback.html?meetingId=3c687a7249dfab20abaadb8cba3ea8fff973c56a-1567802108298</url>
+              <processingTime>3227</processingTime>
+              <length>0</length>
+              <size>140330</size>
+              <preview>
+                <images>
+                  <image alt="Welcome To BigBlueButton" height="136" width="176">https://amy.blindside-dev.com/presentation/3c687a7249dfab20abaadb8cba3ea8fff973c56a-1567802108298/presentation/d2d9a672040fbde2a47a10bf6c37b6a4b5ae187f-1567802108309/thumbnails/thumb-1.png</image>
+                  <image alt="This slide left blank for whiteboard" height="136" width="176">https://amy.blindside-dev.com/presentation/3c687a7249dfab20abaadb8cba3ea8fff973c56a-1567802108298/presentation/d2d9a672040fbde2a47a10bf6c37b6a4b5ae187f-1567802108309/thumbnails/thumb-2.png</image>
+                  <image alt="This slide left blank for whiteboard" height="136" width="176">https://amy.blindside-dev.com/presentation/3c687a7249dfab20abaadb8cba3ea8fff973c56a-1567802108298/presentation/d2d9a672040fbde2a47a10bf6c37b6a4b5ae187f-1567802108309/thumbnails/thumb-3.png</image>
+                </images>
+              </preview>
+            </format>
+          </playback>
+          <data></data>
+        </recording>
+      </recordings>
+    </response>', headers: {}) if ENV['LOADBALANCER_ENDPOINT']
     stub_request(:any, /#{ENV['LOADBALANCER_ENDPOINT'] + 'api2\/getUserGreenlightCredentials'}/)
       .with(
         headers:
