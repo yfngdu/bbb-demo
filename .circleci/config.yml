@@ -17,8 +17,8 @@ jobs:
           BUNDLER_VERSION: 2.0.2
       - image: circleci/postgres:9.6.2-alpine
         environment:
-            POSTGRES_USER: user
-            POSTGRES_DB: bbb_demo_test
+          POSTGRES_USER: user
+          POSTGRES_DB: bbb_demo_test
 
     working_directory: ~/repo
 
@@ -43,6 +43,7 @@ jobs:
             bundle install --jobs=4 --retry=3 --path vendor/bundle
             yarn install --check-files
             RAILS_ENV="test bundle exec rspec -r rspec_junit_formatter --format RspecJunitFormatter -o $CIRCLE_TEST_REPORTS/rspec/junit.xml"
+            sudo apt install -y postgresql-client || true
 
       - save_cache:
           paths:
@@ -52,9 +53,10 @@ jobs:
       - run:
           name: Install postgres; Database setup
           command: |
-            sudo apt install -y postgresql-client || true
             bundle exec rake db:create
             # bundle exec rake db:schema:load
+          environment:
+            DATABASE_URL: "postgres://user@localhost:5432/bbb_demo_test"
 
       # run tests!
       - run:
