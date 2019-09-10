@@ -40,7 +40,7 @@ RSpec.configure do |config|
   # external servers, api stubbing is used to simulate external server
   # responses
   config.before(:each) do
-    stub_request(:any, /#{"http:\/\/blindside-dev\/bigbluebutton\/api"}/)
+    stub_request(:any, /#{"https:\/\/amy.blindside-dev.com\/bigbluebutton\/api"}/)
       .with(
         headers:
         {

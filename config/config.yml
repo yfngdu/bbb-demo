@@ -19,3 +19,4 @@ servers:
   spec/features/create_meeting.rb:
     url: 'https://amy.blindside-dev.com/bigbluebutton/api'
     secret: 'b7a4172822e3ead1a05859fd06b7f88e'
+    version: 0.8
