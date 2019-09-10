@@ -14,8 +14,8 @@ servers:
     url: 'https://amy.blindside-dev.com/bigbluebutton/api'
     secret: 'b7a4172822e3ead1a05859fd06b7f88e'
   bbb-other:
-    url: 'https://localhost:3000/bigbluebutton/api'
-    secret: 'lka98f52e8akdlsoie400365b55e98s7'
+    url: 'https://amy.blindside-dev.com/bigbluebutton/api'
+    secret: 'b7a4172822e3ead1a05859fd06b7f88e'
   spec/features/create_meeting.rb:
     url: 'https://amy.blindside-dev.com/bigbluebutton/api'
     secret: 'b7a4172822e3ead1a05859fd06b7f88e'
