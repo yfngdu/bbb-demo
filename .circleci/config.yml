@@ -15,13 +15,10 @@ jobs:
       # - image: circleci/postgres:9.4
         environment:
           BUNDLER_VERSION: 2.0.2
-      - image: circleci/mysql:5.7
+      - image: circleci/postgres:9.6.2-alpine
         environment:
-          MYSQL_HOST: 127.0.0.1
-          MYSQL_ROOT_PASSWORD: rootpw
-          MYSQL_DATABASE: bbb_demo_test
-          MYSQL_USER: user
-          MYSQL_PASSWORD: passw0rd
+            POSTGRES_USER: user
+            POSTGRES_DB: circle-test_test
 
     working_directory: ~/repo
 
@@ -53,21 +50,9 @@ jobs:
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
       - run:
-      # Our primary container isn't MYSQL so run a sleep command until it's ready.
-          name: Waiting for MySQL to be ready
+          name: Install postgres; Database setup
           command: |
-            for i in `seq 1 10`;
-            do
-              nc -z 127.0.0.1 3306 && echo Success && exit 0
-              echo -n .
-              sleep 1
-            done
-            echo Failed waiting for MySQL && exit 1
-      - run:
-          name: Install MySQL CLI; Database setup
-          command: |
-            sudo apt-get install default-mysql-client
-            mysql -h 127.0.0.1 -u user -ppassw0rd bbb_demo_test < sql-data/dummy.sql
+            sudo apt install -y postgresql-client || true
             bundle exec rake db:create
             # bundle exec rake db:schema:load
 
