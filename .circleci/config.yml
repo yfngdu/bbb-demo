@@ -32,6 +32,9 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
+      - run: start postgres server
+        command: |
+          pg_ctl -D /var/lib/postgresql/data -l logfile start
       - run:
           name: install dependencies
           command: |
@@ -56,7 +59,6 @@ jobs:
           command: |
             # bundle exec rake db:create
             # bundle exec rake db:schema:load
-            pg_ctl -D /var/lib/postgresql/data -l logfile start
           environment:
             DATABASE_URL: "postgres://user@localhost:5432/bbb_demo_test"
 
