@@ -1,7 +1,7 @@
 debug: false
 
 # maximum wait for a response to any API request (secs)
-timeout_req: 360
+timeout_req: 60
 
 # maximum wait for a meeting to be ended after end_meeting is called (secs)
 timeout_ending: 30
@@ -17,5 +17,5 @@ servers:
     url: 'https://amy.blindside-dev.com/bigbluebutton/api'
     secret: 'b7a4172822e3ead1a05859fd06b7f88e'
   spec/features/create_meeting.rb:
-    url: $BIGBLUEBUTTON_ENDPOINT
-    secret: $BIGBLUEBUTTON_SECRET
+    url: 'https://amy.blindside-dev.com/bigbluebutton/api'
+    secret: 'b7a4172822e3ead1a05859fd06b7f88e'

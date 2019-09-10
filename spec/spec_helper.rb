@@ -20,7 +20,86 @@ require 'rspec/rails'
 require 'capybara/rspec'
 require 'capybara/rails'
 require 'webdrivers'
+require 'simplecov'
+require 'coveralls'
+SimpleCov.formatter = Coveralls::SimpleCov::Formatter
+SimpleCov.start do
+  add_filter 'lib/bbb_api.rb'
+end
+
+require 'faker'
+require 'factory_bot_rails'
+
+require 'webmock/rspec'
+
+# For testing, disable connections to external servers
+WebMock.disable_net_connect!(allow_localhost: true)
+
 RSpec.configure do |config|
+  # rspec webmock config goes here. To prevent tests from defaulting to
+  # external servers, api stubbing is used to simulate external server
+  # responses
+  config.before(:each) do
+    stub_request(:any, /#{"http:\/\/blindside-dev\/bigbluebutton\/api"}/)
+      .with(
+        headers:
+        {
+          'Accept': '*/*',
+          'Accept-Encoding': 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+          'User-Agent': 'Ruby',
+        }
+      )
+      .to_return(status: 200, body: "", headers: {})
+    stub_request(:any, /#{ENV['LOADBALANCER_ENDPOINT'] + 'api'}/)
+      .with(
+        headers:
+        {
+          'Accept': '*/*',
+          'Accept-Encoding': 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+          'User-Agent': 'Ruby',
+        }
+      )
+      .to_return(status: 200, body: "", headers: {}) if ENV['LOADBALANCER_ENDPOINT']
+    stub_request(:any, /#{ENV['LOADBALANCER_ENDPOINT'] + 'api\/getUser'}/)
+      .with(
+        headers:
+        {
+          'Accept': '*/*',
+          'Accept-Encoding': 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+          'User-Agent': 'Ruby',
+        }
+      )
+      .to_return(status: 200, body: "
+        <response>
+          <version>1.0</version>
+          <returncode>SUCCESS</returncode>
+          <user>
+            <name>greenlight</name>
+            <maxMeetings>1000</maxMeetings>
+            <apiURL>http:\/\/bbb.example.com\/bigbluebutton\/api</apiURL>
+            <secret>secret</secret>
+          </user>
+        </response>", headers: {}) if ENV['LOADBALANCER_ENDPOINT']
+    stub_request(:any, /#{ENV['LOADBALANCER_ENDPOINT'] + 'api2\/getUserGreenlightCredentials'}/)
+      .with(
+        headers:
+        {
+          'Accept': '*/*',
+          'Accept-Encoding': 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+          'User-Agent': 'Ruby',
+        }
+      )
+      .to_return(status: 200, body: "
+        <response>
+          <version>2.0</version>
+          <returncode>SUCCESS</returncode>
+          <user>
+            <provider>greenlight</provider>
+            <GOOGLE_HD/>
+          </user>
+        </response>", headers: {}) if ENV['LOADBALANCER_ENDPOINT']
+  end
+
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
@@ -51,8 +130,80 @@ RSpec.configure do |config|
   # triggering implicit auto-inclusion in groups with matching metadata.
   config.shared_context_metadata_behavior = :apply_to_host_groups
 
+  # Include FactoryGirl.
+  config.include FactoryBot::Syntax::Methods
+
+  # The settings below are suggested to provide a good initial experience
+  # with RSpec, but feel free to customize to your heart's content.
+
+  # This allows you to limit a spec run to individual examples or groups
+  # you care about by tagging them with `:focus` metadata. When nothing
+  # is tagged with `:focus`, all examples get run. RSpec also provides
+  # aliases for `it`, `describe`, and `context` that include `:focus`
+  # metadata: `fit`, `fdescribe` and `fcontext`, respectively.
+  # config.filter_run_when_matching :focus
+
+  # Allows RSpec to persist some state between runs in order to support
+  # the `--only-failures` and `--next-failure` CLI options. We recommend
+  # you configure your source control system to ignore this file.
+  # config.example_status_persistence_file_path = "spec/examples.txt"
+
+  # Limits the available syntax to the non-monkey patched syntax that is
+  # recommended. For more details, see:
+  #   - http://rspec.info/blog/2012/06/rspecs-new-expectation-syntax/
+  #   - http://www.teaisaweso.me/blog/2013/05/27/rspecs-new-message-expectation-syntax/
+  #   - http://rspec.info/blog/2014/05/notable-changes-in-rspec-3/#zero-monkey-patching-mode
+  # config.disable_monkey_patching!
+
+  # Print the 10 slowest examples and example groups at the
+  # end of the spec run, to help surface which specs are running
+  # particularly slow.
+  # config.profile_examples = 10
+
+  # Run specs in random order to surface order dependencies. If you find an
+  # order dependency and want to debug it, you can fix the order by providing
+  # the seed, which is printed after each run.
+  #     --seed 1234
+  # config.order = :random
+
+  # Seed global randomization in this process using the `--seed` CLI option.
+  # Setting this allows you to use `--seed` to deterministically reproduce
+  # test failures related to randomization by passing the same `--seed` value
+  # as the one that triggered the failure.
+  # Kernel.srand config.seed
+
+  # rspec-expectations config goes here. You can use an alternate
+  # assertion/expectation library such as wrong or the stdlib/minitest
+  # assertions if you prefer.
+  # config.expect_with :rspec do |expectations|
+    # This option will default to `true` in RSpec 4. It makes the `description`
+    # and `failure_message` of custom matchers include text for helper methods
+    # defined using `chain`, e.g.:
+    #     be_bigger_than(2).and_smaller_than(4).description
+    #     # => "be bigger than 2 and smaller than 4"
+    # ...rather than:
+    #     # => "be bigger than 2"
+    # expectations.include_chain_clauses_in_custom_matcher_descriptions = true
+  # end
+
+  # rspec-mocks config goes here. You can use an alternate test double
+  # library (such as bogus or mocha) by changing the `mock_with` option here.
+  # config.mock_with :rspec do |mocks|
+    # Prevents you from mocking or stubbing a method that does not exist on
+    # a real object. This is generally recommended, and will default to
+    # `true` in RSpec 4.
+    # mocks.verify_partial_doubles = true
+  # end
+
+  # This option will default to `:apply_to_host_groups` in RSpec 4 (and will
+  # have no way to turn it off -- the option exists only for backwards
+  # compatibility in RSpec 3). It causes shared context metadata to be
+  # inherited by the metadata hash of host groups and examples, rather than
+  # triggering implicit auto-inclusion in groups with matching metadata.
+  # config.shared_context_metadata_behavior = :apply_to_host_groups
+
   # add name routes to specs
-  config.include Rails.application.routes.url_helpers
+  # config.include Rails.application.routes.url_helpers
 
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
@@ -107,20 +258,20 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
-config.disable_monkey_patching!
-
-if config.files_to_run.one?
-  # Use the documentation formatter for detailed output,
-  # unless a formatter has already been configured
-  # (e.g. via a command-line flag).
-  config.default_formatter = "doc"
-end
-
-  Capybara.register_driver :selenium do |app|
-    Capybara::Selenium::Driver.new(app, browser: :chrome)
-  end
-  Capybara.configure do |config|
-    config.default_max_wait_time = 10 # seconds
-    config.default_driver        = :selenium_headless #:selenium_chrome
-  end
+# config.disable_monkey_patching!
+#
+# if config.files_to_run.one?
+#   # Use the documentation formatter for detailed output,
+#   # unless a formatter has already been configured
+#   # (e.g. via a command-line flag).
+#   config.default_formatter = "doc"
+# end
+#
+#   Capybara.register_driver :selenium do |app|
+#     Capybara::Selenium::Driver.new(app, browser: :chrome)
+#   end
+#   Capybara.configure do |config|
+#     config.default_max_wait_time = 10 # seconds
+#     config.default_driver        = :selenium_headless #:selenium_chrome
+#   end
 end

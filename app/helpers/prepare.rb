@@ -1,5 +1,6 @@
 require 'bigbluebutton_api'
 require 'yaml'
+require 'erb'
 
 def prepare
   config_file = File.join(File.dirname(__FILE__), '..', '..', 'config', 'config.yml')
@@ -9,6 +10,7 @@ def prepare
     puts
     Kernel.exit!
   end
+  puts config_file
   @config = YAML.load_file(config_file)
 
   puts "** Config:"

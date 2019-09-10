@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="rspec" tests="1" skipped="0" failures="0" errors="0" time="5.830489" timestamp="2019-09-10T11:55:48-04:00" hostname="amy-XPS-8300">
+<testsuite name="rspec" tests="3" skipped="0" failures="3" errors="0" time="0.053733" timestamp="2019-09-10T16:39:52-04:00" hostname="amy-XPS-8300">
 <properties>
-<property name="seed" value="18898"/>
+<property name="seed" value="44315"/>
 </properties>
-<testcase classname="spec.features.create_meeting" name="Create Meeting:  Go to home page" file="./spec/features/create_meeting.rb" time="5.829614"></testcase>
+<testcase classname="spec.features.create_meeting" name="Create Meeting:  Go to home page" file="./spec/features/create_meeting.rb" time="0.035485"><failure message="undefined method `get_recordings&apos; for nil:NilClass" type="NoMethodError">Failure/Error: response = @api.get_recordings
+
+NoMethodError:
+  undefined method `get_recordings&apos; for nil:NilClass
+./app/controllers/pages_controller.rb:10:in `home&apos;
+./spec/features/create_meeting.rb:5:in `block (2 levels) in &lt;top (required)&gt;&apos;</failure></testcase>
+<testcase classname="spec.features.delete_recording" name="Delete recordings:  Delete recordings on home page" file="./spec/features/delete_recording.rb" time="0.001729"><failure message="undefined method `get_recordings&apos; for nil:NilClass" type="NoMethodError">Failure/Error: response = @api.get_recordings
+
+NoMethodError:
+  undefined method `get_recordings&apos; for nil:NilClass
+./spec/features/delete_recording.rb:7:in `block (2 levels) in &lt;top (required)&gt;&apos;</failure></testcase>
+<testcase classname="spec.features.get_recordings" name="Get recordings:  Check recordings on home page" file="./spec/features/get_recordings.rb" time="0.008654"><failure message="undefined method `get_recordings&apos; for nil:NilClass" type="NoMethodError">Failure/Error: response = @api.get_recordings
+
+NoMethodError:
+  undefined method `get_recordings&apos; for nil:NilClass
+./spec/features/get_recordings.rb:7:in `block (2 levels) in &lt;top (required)&gt;&apos;</failure></testcase>
 </testsuite>
