@@ -24,6 +24,7 @@ class Api::RoomController < ActionController::API
           :maxParticipants => 25 }
         @api.create_meeting(meeting_name, meeting_id, options)
         url = @api.join_meeting_url(meeting_id, moderator_name, options[:moderatorPW])
+
         redirect_to url
       end
 
