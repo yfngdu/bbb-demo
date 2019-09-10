@@ -63,7 +63,7 @@ jobs:
           name: run tests
           command: |
             mkdir /tmp/test-results
-            bin/rails spec/features/*.rb"
+            bin/rails spec/features/*.rb
 
       # collect reports
       - store_test_results:
