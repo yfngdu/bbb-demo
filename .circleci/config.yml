@@ -50,13 +50,13 @@ jobs:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
-      - run:
-          name: Install postgres; Database setup
-          command: |
-            bundle exec rake db:create
-            # bundle exec rake db:schema:load
-          environment:
-            DATABASE_URL: "postgres://user@localhost:5432/bbb_demo_test"
+      # - run:
+      #     name: Database setup
+      #     command: |
+      #       bundle exec rake db:create
+      #       # bundle exec rake db:schema:load
+      #     environment:
+      #       DATABASE_URL: "postgres://user@localhost:5432/bbb_demo_test"
 
       # run tests!
       - run:
