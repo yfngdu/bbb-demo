@@ -19,6 +19,7 @@ require 'rspec/rails'
 
 require 'capybara/rspec'
 require 'capybara/rails'
+require 'billy/capybara/rspec'
 require 'webdrivers'
 require 'simplecov'
 require 'coveralls'
@@ -39,6 +40,7 @@ RSpec.configure do |config|
   # rspec webmock config goes here. To prevent tests from defaulting to
   # external servers, api stubbing is used to simulate external server
   # responses
+  Capybara.javascript_driver = :selenium_billy
   config.before(:each) do
     stub_request(:any, /#{"https:\/\/amy.blindside-dev.com\/bigbluebutton\/api"}/)
       .with(
@@ -182,6 +184,7 @@ RSpec.configure do |config|
         </response>", headers: {}) if ENV['LOADBALANCER_ENDPOINT']
   end
 
+  Billy.proxy.stub('https://amy.blindside-dev.com/bigbluebutton/api/join').and_return(:text => 'Congrats on joining the room!')
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.

@@ -56,7 +56,8 @@ group :test do
   gem 'simplecov'
   gem 'coveralls', require: false
   gem 'faker'
-  gem "factory_bot_rails"
+  gem 'factory_bot_rails'
+  gem 'puffing-billy'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
