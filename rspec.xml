@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="rspec" tests="1" skipped="0" failures="1" errors="0" time="0.861580" timestamp="2019-09-11T09:39:09-04:00" hostname="amy-XPS-8300">
+<testsuite name="rspec" tests="1" skipped="0" failures="1" errors="0" time="0.852454" timestamp="2019-09-11T09:44:42-04:00" hostname="amy-XPS-8300">
 <properties>
-<property name="seed" value="59138"/>
+<property name="seed" value="20367"/>
 </properties>
-<testcase classname="spec.features.create_meeting" name="Create Meeting:  Go to home page" file="./spec/features/create_meeting.rb" time="0.853864"><failure message="No route matches [GET] &quot;/bigbluebutton/api/join&quot;" type="ActionController::RoutingError">Failure/Error: click_button &quot;Enter&quot;
+<testcase classname="spec.features.create_meeting" name="Create Meeting:  Go to home page" file="./spec/features/create_meeting.rb" time="0.844727"><failure message="No route matches [GET] &quot;/bigbluebutton/api/join&quot;" type="ActionController::RoutingError">Failure/Error: click_button &quot;Enter&quot;
 
 ActionController::RoutingError:
   No route matches [GET] &quot;/bigbluebutton/api/join&quot;

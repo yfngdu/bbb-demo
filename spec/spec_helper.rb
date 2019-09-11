@@ -184,6 +184,11 @@ RSpec.configure do |config|
         </response>", headers: {}) if ENV['LOADBALANCER_ENDPOINT']
   end
 
+  Billy.configure do |c|
+    c.cache = true
+    c.cache_request_headers = false
+    c.ignore_params = ['https://amy.blindside-dev.com/bigbluebutton/api/join']
+  end
   Billy.proxy.stub('https://amy.blindside-dev.com/bigbluebutton/api/join').and_return(:text => 'Congrats on joining the room!')
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
