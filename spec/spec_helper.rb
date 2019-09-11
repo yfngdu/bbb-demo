@@ -97,6 +97,20 @@ RSpec.configure do |config|
           <messageKey></messageKey>
           <message></message>
         </response>", headers: {})
+        stub_request(:any, /#{"https:\/\/amy.blindside-dev.com\/bigbluebutton\/api\/isMeetingRunning"}/)
+      .with(
+        headers:
+        {
+          'Accept': '*/*',
+          'Accept-Encoding': 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+          'User-Agent': 'Ruby',
+        }
+      )
+      .to_return(status: 200, body: "
+        <response>
+          <returncode>SUCCESS</returncode>
+          <running>false</running>
+        </response>", headers: {})
   stub_request(:any, /#{"https:\/\/amy.blindside-dev.com\/bigbluebutton\/api\/getRecordings"}/)
     .with(
       headers:
