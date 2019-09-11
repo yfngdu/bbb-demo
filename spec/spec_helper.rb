@@ -69,7 +69,7 @@ RSpec.configure do |config|
           'User-Agent': 'Ruby',
         }
       )
-      .to_return(status: 200, body: "", headers: {}) if ENV['LOADBALANCER_ENDPOINT']
+      .to_return(status: 200, body: "", headers: {})
         stub_request(:any, /#{"https:\/\/amy.blindside-dev.com\/bigbluebutton\/api\/create"}/)
       .with(
         headers:
@@ -96,7 +96,7 @@ RSpec.configure do |config|
           <hasBeenForciblyEnded>false</hasBeenForciblyEnded>
           <messageKey></messageKey>
           <message></message>
-        </response>", headers: {}) if ENV['LOADBALANCER_ENDPOINT']
+        </response>", headers: {})
   stub_request(:any, /#{"https:\/\/amy.blindside-dev.com\/bigbluebutton\/api\/getRecordings"}/)
     .with(
       headers:
@@ -147,7 +147,7 @@ RSpec.configure do |config|
           <data></data>
         </recording>
       </recordings>
-    </response>', headers: {}) if ENV['LOADBALANCER_ENDPOINT']
+    </response>', headers: {})
     stub_request(:any, /#{ENV['LOADBALANCER_ENDPOINT'] + 'api2\/getUserGreenlightCredentials'}/)
       .with(
         headers:
