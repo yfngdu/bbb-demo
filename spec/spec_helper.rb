@@ -150,7 +150,7 @@ RSpec.configure do |config|
     </response>', headers: {}) if ENV['LOADBALANCER_ENDPOINT']
     stub_request(:any, /#{ENV['LOADBALANCER_ENDPOINT'] + 'api2\/getUserGreenlightCredentials'}/)
       .with(
-        headers:getUser
+        headers:
         {
           'Accept': '*/*',
           'Accept-Encoding': 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
